@@ -1,5 +1,3 @@
 export default function App() {
-  return (
-    <>Yow what's up?</>
-  );
+  return <>Yow what's up?</>;
 }
