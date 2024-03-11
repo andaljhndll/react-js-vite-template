@@ -1,9 +1,12 @@
+import { QueryParams } from "@/types/react-query.type";
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
 
 export class ApiClient {
   private axiosInstance: AxiosInstance;
+  private baseUrl: string;
 
   constructor(baseUrl: string, timeout: number) {
+    this.baseUrl = baseUrl;
     this.axiosInstance = axios.create({
       baseURL: baseUrl,
       timeout: timeout,
@@ -36,40 +39,85 @@ export class ApiClient {
 
   public async delete<T>(
     url: string,
+    params?: QueryParams,
     config?: AxiosRequestConfig
   ): Promise<AxiosResponse<T>> {
-    return this.axiosInstance.delete<T>(url, config);
+    return this.axiosInstance.delete<T>(
+      this.assembleEndpoint(url, params),
+      config
+    );
   }
 
   public async get<T>(
     url: string,
+    params?: QueryParams,
     config?: AxiosRequestConfig
   ): Promise<AxiosResponse<T>> {
-    return this.axiosInstance.get<T>(url, config);
+    return this.axiosInstance.get<T>(
+      this.assembleEndpoint(url, params),
+      config
+    );
   }
 
   public async post<T>(
     url: string,
     data?: any,
+    params?: QueryParams,
     config?: AxiosRequestConfig
   ): Promise<AxiosResponse<T>> {
-    return this.axiosInstance.post<T>(url, data, config);
+    const requestConfig: AxiosRequestConfig = { params, ...config };
+    return this.axiosInstance.post<T>(
+      this.assembleEndpoint(url),
+      data,
+      requestConfig
+    );
   }
 
   public async put<T>(
     url: string,
     data?: any,
+    params?: QueryParams,
     config?: AxiosRequestConfig
   ): Promise<AxiosResponse<T>> {
-    return this.axiosInstance.put<T>(url, data, config);
+    const requestConfig: AxiosRequestConfig = { params, ...config };
+    return this.axiosInstance.put<T>(
+      this.assembleEndpoint(url),
+      data,
+      requestConfig
+    );
   }
 
   public async patch<T>(
     url: string,
     data?: any,
+    params?: QueryParams,
     config?: AxiosRequestConfig
   ): Promise<AxiosResponse<T>> {
-    return this.axiosInstance.patch(url, data, config);
+    const requestConfig: AxiosRequestConfig = { params, ...config };
+    return this.axiosInstance.patch(
+      this.assembleEndpoint(url),
+      data,
+      requestConfig
+    );
+  }
+
+  private assembleEndpoint(url: string, params?: any): string {
+    let assembledUrl = this.baseUrl + url;
+
+    if (params) {
+      const queryString = this.getQueryString(params);
+      assembledUrl += `?${queryString}`;
+    }
+
+    return assembledUrl;
+  }
+
+  private getQueryString(params: any): string {
+    return Object.keys(params)
+      .map(
+        (key) => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`
+      )
+      .join("&");
   }
 }
 
