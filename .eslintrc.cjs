@@ -10,6 +10,7 @@ module.exports = {
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended",
+    "plugin:@tanstack/eslint-plugin-query/recommended",
   ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
@@ -17,7 +18,7 @@ module.exports = {
     ecmaVersion: "latest",
     sourceType: "module",
   },
-  plugins: ["react", "@typescript-eslint", "prettier"],
+  plugins: ["react", "@typescript-eslint", "prettier", "@tanstack/query"],
   rules: {
     "react/react-in-jsx-scope": "off",
     "import/extensions": "off",
