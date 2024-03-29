@@ -39,69 +39,43 @@ export class ApiClient {
 
   public async delete<T>(
     url: string,
-    params?: QueryParams,
     config?: AxiosRequestConfig
   ): Promise<AxiosResponse<T>> {
-    return this.axiosInstance.delete<T>(
-      this.assembleEndpoint(url, params),
-      config
-    );
+    return this.axiosInstance.delete<T>(url, config);
   }
 
   public async get<T>(
     url: string,
-    params?: QueryParams,
     config?: AxiosRequestConfig
   ): Promise<AxiosResponse<T>> {
-    return this.axiosInstance.get<T>(
-      this.assembleEndpoint(url, params),
-      config
-    );
+    return this.axiosInstance.get<T>(url, config);
   }
 
   public async post<T>(
     url: string,
-    data?: any,
-    params?: QueryParams,
-    config?: AxiosRequestConfig
+    config?: AxiosRequestConfig,
+    payload?: any
   ): Promise<AxiosResponse<T>> {
-    const requestConfig: AxiosRequestConfig = { params, ...config };
-    return this.axiosInstance.post<T>(
-      this.assembleEndpoint(url),
-      data,
-      requestConfig
-    );
+    return this.axiosInstance.post<T>(url, payload, config);
   }
 
   public async put<T>(
     url: string,
-    data?: any,
-    params?: QueryParams,
-    config?: AxiosRequestConfig
+    config?: AxiosRequestConfig,
+    payload?: any
   ): Promise<AxiosResponse<T>> {
-    const requestConfig: AxiosRequestConfig = { params, ...config };
-    return this.axiosInstance.put<T>(
-      this.assembleEndpoint(url),
-      data,
-      requestConfig
-    );
+    return this.axiosInstance.put<T>(url, payload, config);
   }
 
   public async patch<T>(
     url: string,
-    data?: any,
-    params?: QueryParams,
-    config?: AxiosRequestConfig
+    config?: AxiosRequestConfig,
+    payload?: any
   ): Promise<AxiosResponse<T>> {
-    const requestConfig: AxiosRequestConfig = { params, ...config };
-    return this.axiosInstance.patch(
-      this.assembleEndpoint(url),
-      data,
-      requestConfig
-    );
+    return this.axiosInstance.patch(url, payload, config);
   }
 
-  private assembleEndpoint(url: string, params?: any): string {
+  public assembleEndpoint(url: string, params?: any): string {
     let assembledUrl = this.baseUrl + url;
 
     if (params) {
