@@ -1,5 +1,5 @@
 import { UseQueryOptions } from "@tanstack/react-query";
-import { Undefinable } from "@/types/nullable.type";
+import { Undefinable } from "@customTypes/nullable.type";
 
 export type QueryParams = {
   [key: string]: string | number | boolean | undefined;
