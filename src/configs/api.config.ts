@@ -1,4 +1,3 @@
-import { QueryParams } from "@/types/react-query.type";
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
 
 export class ApiClient {
