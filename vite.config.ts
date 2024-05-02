@@ -8,6 +8,8 @@ import path from "node:path";
 
 export default defineConfig({
   plugins: [react()],
+  // Uncomment if you want your application to run on a custom port
+  // server: {port: },
   test: {
     globals: true,
     environment: "jsdom",
