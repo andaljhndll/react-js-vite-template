@@ -12,11 +12,68 @@
   // "forwardPorts": [],
 
   // Use 'postCreateCommand' to run commands after the container is created.
-  "postCreateCommand": "yarn install"
+  "postCreateCommand": "test -d /workspaces/react-typescript-vite-template/node_modules && echo 'node_modules found; skipping yarn install' || yarn install",
 
   // Configure tool-specific properties.
-  // "customizations": {},
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "editor.tabSize": 2,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "javascript.updateImportsOnFileMove.enabled": "always",
+        "typescript.updateImportsOnFileMove.enabled": "always",
+        "prettier.requireConfig": true,
+        "prettier.htmlWhitespaceSensitivity": "strict",
+        "terminal.integrated.minimumContrastRatio": 1,
+        "git.confirmSync": false,
+        "git.autofetch": true,
+        "workbench.iconTheme": "vscode-icons",
+        "workbench.productIconTheme": "fluent-icons",
 
+        "[jsonc]": {
+          "editor.defaultFormatter": "vscode.json-language-features"
+        },
+        "[json]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "[javascript]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "[javascriptreact]": {
+          "editor.defaultFormatter": "vscode.typescript-language-features"
+        },
+        "[css]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "[typescriptreact]": {
+          "editor.defaultFormatter": "vscode.typescript-language-features"
+        }
+      },
+      "extensions": [
+        "esbenp.prettier-vscode",
+        "bierner.color-info",
+        "eamodio.gitlens",
+        "IBM.output-colorizer",
+        "Gruntfuggly.todo-tree",
+        "stkb.rewrap",
+        "vscode-icons-team.vscode-icons",
+        "vmsynkov.colonize",
+        "christian-kohler.path-intellisense",
+        "AlDuncanson.react-hooks-snippets",
+        "xabikos.JavaScriptSnippets",
+        "deinsoftware.arrow-function-snippets",
+        "sdras.fortnite-vscode-theme",
+        "mikestead.dotenv",
+        "atlassian.atlascode",
+        "EditorConfig.EditorConfig",
+        "PKief.material-icon-theme",
+        "miguelsolorio.fluent-icons",
+        "donjayamanne.githistory",
+        "jock.svg",
+        "figma.figma-vscode-extension"
+      ]
+    }
+  }
   // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
   // "remoteUser": "root"
 }
